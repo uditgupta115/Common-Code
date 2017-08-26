@@ -62,6 +62,8 @@ def datasaver():
         except:
             pass
 
+
+# way to use multithreading 
 if __name__ == '__main__':
     thread1t = threading.Thread(target=datasaver)
     thread1t.daemon = True
