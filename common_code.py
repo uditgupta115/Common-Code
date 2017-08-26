@@ -1,4 +1,4 @@
-# '''decode json file from the content'''
+# decode json file from the content.
 
 if 'json' in http.headers['content-type']:
     print http.headers
@@ -14,6 +14,28 @@ if 'json' in http.headers['content-type']:
     print
 
 
+
+# this will generate queries need to give only tablename and dict as parameters. 
+def ins_query_maker(tablename, rowdict):
+    keys = tuple(rowdict)
+    dictsize = len(rowdict)
+    sql = ''
+    try:
+        for i in range(dictsize):
+            if type(rowdict[keys[i]]).__name__ == 'str':
+                sql += '\"' + str(rowdict[keys[i]]).replace("'", "").replace('"', '') + '\"'
+            else:
+                sql += "\"" + str(rowdict[keys[i]]).replace("'", "").replace('"', '') + "\""
+            if i < dictsize-1:
+                sql += ', '
+    except Exception as e:
+        print e
+    query = "insert ignore into " + str(tablename) + " " + "(" + ", ".join(keys) + ")" + " values (" + sql + ")"
+    # print query
+    return query  # in real code we do this
+
+
+#  handler for new Handler in Database Queries!
 def column_creater(error_msg, table_name, db_con):
     if 'Unknown column' in error_msg:
         sp_data = error_msg.split(' ')
@@ -23,6 +45,7 @@ def column_creater(error_msg, table_name, db_con):
                 sql_qry = 'ALTER TABLE %s ADD %s VARCHAR(250);' % (table_name, col_name)
                 print sql_qry
                 db_con.execute(sql_qry)
+
 
 
 def datasaver():
@@ -52,25 +75,8 @@ if __name__ == '__main__':
         threading.Thread._Thread__stop(thread1t)
         print thread1t.isAlive()
 # new
-def ins_query_maker(tablename, rowdict):
-    keys = tuple(rowdict)
-    dictsize = len(rowdict)
-    sql = ''
-    try:
-        for i in range(dictsize):
-            if type(rowdict[keys[i]]).__name__ == 'str':
-                sql += '\"' + str(rowdict[keys[i]]).replace("'", "").replace('"', '') + '\"'
-            else:
-                sql += "\"" + str(rowdict[keys[i]]).replace("'", "").replace('"', '') + "\""
-            if i < dictsize-1:
-                sql += ', '
-    except Exception as e:
-        print e
-    query = "insert ignore into " + str(tablename) + " " + "(" + ", ".join(keys) + ")" + " values (" + sql + ")"
-    # print query
-    return query  # in real code we do this
 
-
+#old one updated is upper only!
 def ins_query_maker(tablename, rowdict):
     keys = tuple(rowdict)
     dictsize = len(rowdict)
@@ -86,14 +92,18 @@ def ins_query_maker(tablename, rowdict):
     print(query)  # for demo purposes we do this
     return query  # in real code we do this
 
+
+
+# this one is to let you know how to use multiprocess module in python!
+
 # -*- coding: utf-8 -*-
 import threading
 import os
 import pcap
 from multiprocessing import Process
-from cheapflightv1 import cheapflight_execution
-from cheapflightv1 import cheapflight_execution_json
-from tangov1 import tango_execution
+# from cheapflightv1 import cheapflight_execution
+# from cheapflightv1 import cheapflight_execution_json
+# from tangov1 import tango_execution
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
