@@ -1,7 +1,11 @@
 
 Hash_Theory = """
+Being a map means relating two pieces of information, but a map also has one further requirement.
 
-We use a special function that turns data like the string “Joan McNeil” into a number. This function is called a hashing function, or a hash function. 
+Imagine we want our computer to remember that our good friend Joan McNeil is a Libra.
+ We take her name, and we turn that name into a number.
+  Let’s say that the number we correspond with the name “Joan McNeil” is 17. We find the 17th index of the array we’re using to store our map and save the value (Libra) there.
+   How did we get 17, though? We use a special function that turns data like the string “Joan McNeil” into a number. This function is called a hashing function, or a hash function. 
  Hashing functions are useful in many domains, but for our data structure the most important aspect is that a hashing function returns an array index as output.
 
 A hash map with a linked list separate chaining strategy follows a similar flow to the hash maps that have been described so far.
