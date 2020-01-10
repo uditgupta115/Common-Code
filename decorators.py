@@ -1,7 +1,7 @@
 from datetime import datetime
-# 1 type:
 
 
+# basic decorator
 def decorator_v1(func):
 	b_time = datetime.now()
 
