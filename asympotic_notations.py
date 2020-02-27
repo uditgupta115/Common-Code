@@ -1,3 +1,11 @@
+"""
+
+Sometimes, a program may have a different runtime for the best case and worst case.
+For instance, a program could have a best case runtime of Θ(1) and a worst case of Θ(N).
+We use a different notation when this is the case. We use big Omega or Ω to describe the
+ best case and big O or O to describe the worst case. 
+
+"""
 # Asympotic Notations Examples:
 
 # -----------------------------Analyse the Run Time--------------------------------- #
